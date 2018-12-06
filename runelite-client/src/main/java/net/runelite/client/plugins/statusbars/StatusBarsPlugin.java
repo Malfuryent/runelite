@@ -35,6 +35,7 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDependency;
 import net.runelite.client.plugins.PluginDescriptor;
+import net.runelite.client.plugins.interfacestyles.InterfaceStylesPlugin;
 import net.runelite.client.plugins.itemstats.ItemStatPlugin;
 import static net.runelite.client.plugins.statusbars.StatusBarsOverlay.ACTIVE_PRAYER_COLOR;
 import static net.runelite.client.plugins.statusbars.StatusBarsOverlay.HEALTH_COLOR;

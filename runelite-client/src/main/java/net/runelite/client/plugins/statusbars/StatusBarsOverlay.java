@@ -38,6 +38,8 @@ import net.runelite.api.Skill;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.game.SkillIconManager;
+import net.runelite.client.plugins.interfacestyles.Skin;
+import net.runelite.client.plugins.interfacestyles.InterfaceStylesService;
 import net.runelite.client.plugins.itemstats.Effect;
 import net.runelite.client.plugins.itemstats.ItemStatChangesService;
 import net.runelite.client.plugins.itemstats.StatChange;
@@ -82,8 +84,6 @@ class StatusBarsOverlay extends Overlay
 	private final SkillIconManager skillIconManager;
 	private final TextComponent textComponent = new TextComponent();
 	private final ItemStatChangesService itemStatService;
-	
-
 	private final Image prayerImage;
 
 	@Inject
@@ -107,6 +107,8 @@ class StatusBarsOverlay extends Overlay
 		{
 			return null;
 		}
+
+		System.out.println(interfaceStylesService.getSkin());
 
 		Viewport curViewport = null;
 		Widget curWidget = null;

@@ -26,6 +26,7 @@
  */
 package net.runelite.client.plugins.interfacestyles;
 
+import com.google.inject.Binder;
 import com.google.inject.Provides;
 import java.awt.image.BufferedImage;
 import java.awt.image.PixelGrabber;
@@ -33,6 +34,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
+
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.SpriteID;
@@ -57,6 +60,9 @@ import net.runelite.client.plugins.PluginDescriptor;
 )
 public class InterfaceStylesPlugin extends Plugin
 {
+	@Getter
+	private Skin skin ;
+
 	@Inject
 	private Client client;
 
@@ -68,6 +74,12 @@ public class InterfaceStylesPlugin extends Plugin
 
 	@Inject
 	private SpriteManager spriteManager;
+
+	@Override
+	public void configure(Binder binder)
+	{
+		binder.bind(InterfaceStylesService.class).to(InterfaceStylesSericeImpl.class);
+	}
 
 	@Provides
 	InterfaceStylesConfig provideConfig(ConfigManager configManager)
@@ -115,6 +127,21 @@ public class InterfaceStylesPlugin extends Plugin
 		adjustWidgetDimensions();
 	}
 
+	private Skin onSkinChange()
+	{
+		Skin skin1 = Skin.AROUND_2005;
+
+		for (SpriteOverride spriteOverride : SpriteOverride.values()) {
+			for (Skin skin : spriteOverride.getSkin()) {
+				if (skin == config.skin()) {
+					skin1 = skin;
+				}
+			}
+		}
+
+		return skin1;
+	}
+
 	private void overrideSprites()
 	{
 		for (SpriteOverride spriteOverride : SpriteOverride.values())
@@ -127,6 +154,7 @@ public class InterfaceStylesPlugin extends Plugin
 
 					if (spriteOverride.getSpriteID() == SpriteID.COMPASS_TEXTURE)
 					{
+						onSkinChange();
 						client.setCompass(spritePixels);
 					}
 					else
