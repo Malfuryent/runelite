@@ -38,7 +38,6 @@ import net.runelite.api.Skill;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.game.SkillIconManager;
-import net.runelite.client.plugins.interfacestyles.Skin;
 import net.runelite.client.plugins.interfacestyles.InterfaceStylesService;
 import net.runelite.client.plugins.itemstats.Effect;
 import net.runelite.client.plugins.itemstats.ItemStatChangesService;

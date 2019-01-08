@@ -61,7 +61,7 @@ import net.runelite.client.plugins.PluginDescriptor;
 public class InterfaceStylesPlugin extends Plugin
 {
 	@Getter
-	private Skin skin ;
+	private ;
 
 	@Inject
 	private Client client;
@@ -127,21 +127,6 @@ public class InterfaceStylesPlugin extends Plugin
 		adjustWidgetDimensions();
 	}
 
-	private Skin onSkinChange()
-	{
-		Skin skin1 = Skin.AROUND_2005;
-
-		for (SpriteOverride spriteOverride : SpriteOverride.values()) {
-			for (Skin skin : spriteOverride.getSkin()) {
-				if (skin == config.skin()) {
-					skin1 = skin;
-				}
-			}
-		}
-
-		return skin1;
-	}
-
 	private void overrideSprites()
 	{
 		for (SpriteOverride spriteOverride : SpriteOverride.values())
@@ -154,7 +139,6 @@ public class InterfaceStylesPlugin extends Plugin
 
 					if (spriteOverride.getSpriteID() == SpriteID.COMPASS_TEXTURE)
 					{
-						onSkinChange();
 						client.setCompass(spritePixels);
 					}
 					else
