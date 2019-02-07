@@ -42,7 +42,6 @@ import net.runelite.client.plugins.statusbars.renderer.PrayerRenderer;
 import net.runelite.client.plugins.statusbars.renderer.SpecialAttackRenderer;
 import net.runelite.client.ui.overlay.OverlayManager;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @PluginDescriptor(

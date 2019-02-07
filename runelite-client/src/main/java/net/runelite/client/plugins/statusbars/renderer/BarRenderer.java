@@ -47,7 +47,7 @@ public abstract class BarRenderer
 	private static final Color COLOR_OVERHEAL = new Color(216, 255, 139, 150);
 	private static final int BAR_WIDTH = 20;
 	private static final int COUNTER_ICON_HEIGHT = 18;
-	private static final int SKILL_ICON_HEIGHT = 35;
+	private static final int SKILL_ICON_HEIGHT = 36;
 	private static final int PADDING = 1;
 	private static final int OVERHEAL_OFFSET = 2;
 	private static final int HEAL_OFFSET = 3;
@@ -79,7 +79,7 @@ public abstract class BarRenderer
 				filledHeight - PADDING * OFFSET);
 	}
 
-	private void renderIconsAndCounters(Graphics2D graphics, int x, int y)
+	private void renderIconsAndCounters(Graphics2D graphics, int x, int y, int side)
 	{
 		final String counterText = Integer.toString(currentValue);
 		final int widthOfCounter = graphics.getFontMetrics().stringWidth(counterText);
@@ -90,7 +90,15 @@ public abstract class BarRenderer
 			graphics.setFont(FontManager.getRunescapeSmallFont());
 			TEXT.setColor(Color.WHITE);
 			TEXT.setText(counterText);
-			TEXT.setPosition(new java.awt.Point(x + centerText + 1, y + COUNTER_ICON_HEIGHT));
+
+			if (side == 1)
+			{
+				TEXT.setPosition(new java.awt.Point(x + centerText + 3, y + COUNTER_ICON_HEIGHT));
+			}
+			if (side == 2)
+			{
+				TEXT.setPosition(new java.awt.Point(x + centerText + 1, y + COUNTER_ICON_HEIGHT));
+			}
 		}
 		else
 		{
@@ -100,7 +108,15 @@ public abstract class BarRenderer
 		if (config.enableSkillIcon())
 		{
 			graphics.drawImage(icon, x + ICON_AND_COUNTER_OFFSET_X + PADDING, y + ICON_AND_COUNTER_OFFSET_Y - icon.getWidth(null), null);
-			TEXT.setPosition(new java.awt.Point(x + centerText + 1, y + SKILL_ICON_HEIGHT));
+			if (side == 1)
+			{
+				TEXT.setPosition(new java.awt.Point(x + centerText + 2, y + SKILL_ICON_HEIGHT));
+			}
+
+			if (side == 2)
+			{
+				TEXT.setPosition(new java.awt.Point(x + centerText + 1, y + SKILL_ICON_HEIGHT));
+			}
 		}
 
 		TEXT.render(graphics);
@@ -148,13 +164,13 @@ public abstract class BarRenderer
 		return (int) Math.round(ratio * size);
 	}
 
-	public void draw(Client client, StatusBarsOverlay overlay, Graphics2D graphics, int x, int y, int height)
+	public void draw(Client client, StatusBarsOverlay overlay, Graphics2D graphics, int x, int y, int height, int side)
 	{
 		update(client, overlay);
 		renderBar(graphics, x, y, height);
 		if (config.enableRestorationBars())
 			renderRestore(graphics, x, y, height);
 		if (config.enableSkillIcon() || config.enableCounter())
-			renderIconsAndCounters(graphics, x, y);
+			renderIconsAndCounters(graphics, x, y, side);
 	}
 }
