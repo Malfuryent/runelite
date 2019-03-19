@@ -63,7 +63,6 @@ public class BarrowsBrotherSlainOverlay extends Overlay
 	{
 		if (config.showBarrowsGUI())
 		{
-
 			// Do not display overlay if potential is null/hidden
 			final Widget potential = client.getWidget(WidgetInfo.BARROWS_POTENTIAL);
 			if (potential == null || potential.isHidden())
@@ -75,8 +74,8 @@ public class BarrowsBrotherSlainOverlay extends Overlay
 			final Widget barrowsBrothers = client.getWidget(WidgetInfo.BARROWS_BROTHERS);
 			if (barrowsBrothers != null)
 			{
-				barrowsBrothers.setHidden(true);
-				potential.setHidden(true);
+				barrowsBrothers.deleteAllChildren();
+				potential.setText("");
 			}
 
 			panelComponent.getChildren().clear();
